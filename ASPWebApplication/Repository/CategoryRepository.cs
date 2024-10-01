@@ -13,10 +13,6 @@ namespace ASPWebApplication.Repository
         }
 
 
-        public void Save()
-        {
-            _db.SaveChanges();
-        }
 
         public void Update(Category category)
         {
