@@ -1,35 +1,49 @@
-﻿using ASPWebApplication.Repository.IRepository;
+﻿using ASPWebApplication.Data;
+using ASPWebApplication.Repository.IRepository;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System.Linq.Expressions;
 
 namespace ASPWebApplication.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        
+        private readonly ApplicationDbContext _db;
+        internal DbSet<T> dbSet;
 
-        void IRepository<T>.Add(T entity)
+        public Repository(ApplicationDbContext db)
         {
-            throw new NotImplementedException();
+            _db = db;
+            this.dbSet = _db.Set<T>();
         }
 
-        T IRepository<T>.Get(Expression<Func<T, bool>> filter)
+        public void Add(T entity)
         {
-            throw new NotImplementedException();
+            dbSet.Add(entity);
         }
 
-        IEnumerable<T> IRepository<T>.GetAll()
+        public T Get(Expression<Func<T, bool>> filter)
         {
-            throw new NotImplementedException();
+            IQueryable<T> query = dbSet;
+            query = query.Where(filter);
+            return query.FirstOrDefault();
+
         }
 
-        void IRepository<T>.Remove(T entity)
+        public IEnumerable<T> GetAll()
         {
-            throw new NotImplementedException();
+            IQueryable<T> query = dbSet;
+            return query.ToList();
         }
 
-        void IRepository<T>.RemoveRange(IEnumerable<T> entity)
+        public void Remove(T entity)
         {
-            throw new NotImplementedException();
+            dbSet.Remove(entity);
+        }
+
+        public void RemoveRange(IEnumerable<T> entity)
+        {
+            dbSet.RemoveRange(entity);
         }
     }
 }
