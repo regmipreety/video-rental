@@ -1,4 +1,4 @@
-﻿using ASPWebApplication.Models;
+﻿using ASPWebApplication.Areas.Admin.Models;
 
 namespace ASPWebApplication.Repository.IRepository
 {
