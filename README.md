@@ -1,9 +1,9 @@
 Build real world e-commerce application using ASP.NET Core MVC, Entity Framework Core and ASP.NET Core Identity.
 
 <h3>Dependency Injection Service Lifetimes</h3>
-* Transient - New Service- every time requested *
-* Scoped - New Service- once per request *
-* Singleton - New Service- once per application lifetime *
+* Transient - New Service- every time requested 
+* Scoped - New Service- once per request 
+* Singleton - New Service- once per application lifetime 
 
 <h3>Repository Pattern </h3>
 <p>The Repository Pattern is a design pattern commonly used in ASP.NET applications to abstract data access logic from the business logic. It acts as a middle layer between the application's business logic and data access layers, providing a clean and centralized way to manage data interactions, typically with databases. The Repository Pattern helps organize code, promote testability, and decouple the business layer from the data access layer.
@@ -22,4 +22,31 @@ Separation of Concerns:
 The Repository Pattern separates business logic from data access logic, adhering to the Single Responsibility Principle. This means that changes to the data source or the way data is retrieved only affect the repository layer, leaving the business logic untouched.
 Testability:
 
-Since the data access logic is abstracted, it is easier to unit test the business logic by mocking the repository. This makes the application more testable, particularly when using dependency injection to provide repository instances.</p>
+Since the data access logic is abstracted, it is easier to unit test the business logic by mocking the repository. 
+This makes the application more testable, particularly when using dependency injection to provide repository instances.</p>
+
+<h3>Unit Of Work (UoW)</h3>
+<p>The Unit of Work (UoW) is a design pattern used in software development to manage and coordinate changes across multiple repository objects during a business transaction, ensuring that all changes are committed or rolled back as a single unit. In the context of .NET (including .NET 8), the Unit of Work pattern works particularly well with Entity Framework (EF), as EF already implements many of the features needed for transaction management.
+
+Unit of Work Overview
+The Unit of Work pattern in .NET is a way of managing multiple repository changes under one transaction boundary, making sure that all data operations are performed in an atomic manner. The main objectives of the Unit of Work pattern are:
+
+Maintain Consistency: By tracking changes across repositories, it can ensure that all changes are committed or rolled back together.
+Minimize Database Access: The pattern delays changes to the database until everything is ready to be committed.
+Transaction Management: Unit of Work coordinates the work of multiple repositories, managing commit and rollback functionality.
+Key Components
+Repositories: Each repository encapsulates logic for data operations on a particular entity.
+Unit of Work Class: It manages the repositories and calls SaveChanges() in a single transaction when all operations are complete.</p>
+
+<h3>Areas</h3>
+<p>
+Areas in ASP.NET are a feature that helps to organize large web applications into smaller, functional sections, making it easier to manage complexity and maintain separation of concerns. Each area is essentially a mini-MVC structure within an ASP.NET application, with its own controllers, views, and models. Areas are particularly useful for dividing application functionality logically, such as for different modules or sections like "Admin," "Customer," "Products," etc.
+
+Key Features of Areas
+Modular Structure: Each area contains its own set of controllers, views, and models, which helps to modularize the application into distinct sections.
+Independent MVC Structures: An area has its own Controllers, Views, and optionally Models, similar to how the main MVC application is organized.
+Routing: Areas have their own routes, which can help provide URLs that are specific to each part of the application. This also makes it easier to manage more complex routing configurations.
+Common Use Cases
+Admin vs. Customer Modules: For instance, an application may have an "Admin" area for managing the backend and a "Customer" area for users interacting with the frontend.
+Feature Segmentation: Features like reports, products, or support can each be organized into separate areas to facilitate easier development and maintenance.
+</p>
