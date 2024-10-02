@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace ASPWebApplication.Areas.Admin.Models
+namespace ASPWebApplication.Models
 {
     public class Category
     {

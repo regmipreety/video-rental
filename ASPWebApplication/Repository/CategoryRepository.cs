@@ -1,5 +1,5 @@
-﻿using ASPWebApplication.Areas.Admin.Models;
-using ASPWebApplication.Data;
+﻿using ASPWebApplication.Data;
+using ASPWebApplication.Models;
 using ASPWebApplication.Repository.IRepository;
 
 namespace ASPWebApplication.Repository
