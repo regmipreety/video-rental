@@ -50,3 +50,40 @@ Common Use Cases
 Admin vs. Customer Modules: For instance, an application may have an "Admin" area for managing the backend and a "Customer" area for users interacting with the frontend.
 Feature Segmentation: Features like reports, products, or support can each be organized into separate areas to facilitate easier development and maintenance.
 </p>
+<table>
+<tr>
+<th>ViewBag</th>
+<th>ViewData</th>
+<th>TempData</th>
+</tr>
+<tr>
+<td>
+<p>
+* ViewBag transfers data from the Controller to View, not vice-versa. Ideal situations in which the temporary data is not in a model.
+* ViewBag is a dynamic property that takes advantage of the new dynamic features in C# 4.0. Any number of properties can be assigned to ViewBag.
+* The ViewBag's life only lasts during the current http request. ViewBag values will be null if redirection occurs.
+
+</p>
+</td>
+<td>
+<p>
+* ViewData transfers data from the Controller to View, not vice-versa. Ideal situations in which the temporary data is not in a model. It is derived from ViewDataDictionary which is a dictionary type.
+* ViewData value must be type cast before use.
+* The ViewData's life only lasts during the current http request. ViewData values will be null if redirection occurs.
+</p>
+</td>
+<td>
+<p>
+* TempData can be used to store data between two consecutive requests.
+* TempData internally use Session to the data, so think of it as a short lived session.
+* TempData value must be type cast before use. Check for null values to avoid runtime error.
+* TempData can be used to store only one time messages like error messages, validation messages.
+</p>
+</td>
+</tr>
+</table>
+<h3>View Model</h3>
+<p>
+A View Model serves as a specialized object that contains only the data required by the view, helping to facililate the flow of information between controller and the view. 
+Entities are designed to model the structure of the database, while View Models are tailored to the specific needs of the view. It helps to implement the single responsibility in the SOLID principle.
+</p>
