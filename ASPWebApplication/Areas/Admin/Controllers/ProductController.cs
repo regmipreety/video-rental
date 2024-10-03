@@ -4,6 +4,7 @@ using ASPWebApplication.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
+using System.IO;
 
 namespace ASPWebApplication.Areas.Admin.Controllers
 {
@@ -11,10 +12,13 @@ namespace ASPWebApplication.Areas.Admin.Controllers
 	public class ProductController : Controller
 	{
 		private readonly IUnitOfWork _unitOfWork;
+		private readonly IWebHostEnvironment _webHostEnvironment;
 
-		public ProductController(IUnitOfWork unitOfWork)
+
+		public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
 		{
 			_unitOfWork = unitOfWork;
+			_webHostEnvironment = webHostEnvironment;
 		}
 		public IActionResult Index()
 		{
@@ -48,24 +52,47 @@ namespace ASPWebApplication.Areas.Admin.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult Upsert(ProductVM productVM, IFormFile? file, int? id)
+		public IActionResult Upsert(ProductVM productVM, IFormFile? file)
 		{
 			
 			if (ModelState.IsValid) {
-				if (id == null || id == 0)
+				
+					string rootPath = _webHostEnvironment.WebRootPath;
+					if(file != null)
+					{
+						string fileName = Guid.NewGuid().ToString()+ Path.GetExtension(file.FileName);
+						string productPath = Path.Combine(rootPath, @"images\product");
+
+					if (!string.IsNullOrEmpty(productVM.Product.ImageUrl))
+					{
+						//delete old image
+						var oldPath = 
+							Path.Combine(rootPath, productVM.Product.ImageUrl.TrimStart('\\'));
+						if (System.IO.File.Exists(oldPath)) { 
+							System.IO.File.Delete(oldPath);
+						}
+					}
+						using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
+						{
+							file.CopyTo(fileStream);
+						}
+						productVM.Product.ImageUrl = @"\images\product\" + fileName;
+
+					}
+				if (productVM.Product.Id == 0)
 				{
 					_unitOfWork.Product.Add(productVM.Product);
-					_unitOfWork.Save();
+					
 					TempData["success"] = "Product created successfully.";
 				}
 				else
 				{
-					productVM.Product = _unitOfWork.Product.Get(u => u.Id == id);
 					_unitOfWork.Product.Update(productVM.Product);
-					_unitOfWork.Save();
 					TempData["success"] = "Product updated successfully.";
 				}
-				
+				_unitOfWork.Save();
+
+
 				return RedirectToAction("Index");
 			} else
 			{
