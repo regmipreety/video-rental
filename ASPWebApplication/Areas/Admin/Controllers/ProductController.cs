@@ -23,7 +23,7 @@ namespace ASPWebApplication.Areas.Admin.Controllers
 			return View(products);
 		}
 
-		public IActionResult Create() {
+		public IActionResult Upsert(int? id) {
 			ProductVM productVM = new()
 			{
 				Categories = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
@@ -34,16 +34,38 @@ namespace ASPWebApplication.Areas.Admin.Controllers
 				Product = new Product()
 
 			};
-			return View(productVM);
+			if(id == null || id == 0)
+			{
+				//create new product
+				return View(productVM);
+			} else
+			{
+				//update
+				productVM.Product = _unitOfWork.Product.Get(u=>u.Id == id);
+				return View(productVM);
+
+			}
 		}
 
 		[HttpPost]
-		public IActionResult Create(ProductVM productVM)
+		public IActionResult Upsert(ProductVM productVM, IFormFile? file, int? id)
 		{
+			
 			if (ModelState.IsValid) {
-				_unitOfWork.Product.Add(productVM.Product);
-				_unitOfWork.Save();
-				TempData["success"] = "Product created successfully.";
+				if (id == null || id == 0)
+				{
+					_unitOfWork.Product.Add(productVM.Product);
+					_unitOfWork.Save();
+					TempData["success"] = "Product created successfully.";
+				}
+				else
+				{
+					productVM.Product = _unitOfWork.Product.Get(u => u.Id == id);
+					_unitOfWork.Product.Update(productVM.Product);
+					_unitOfWork.Save();
+					TempData["success"] = "Product updated successfully.";
+				}
+				
 				return RedirectToAction("Index");
 			} else
 			{
@@ -55,37 +77,6 @@ namespace ASPWebApplication.Areas.Admin.Controllers
 				return View(productVM);
 			}
 			
-		}
-
-		public IActionResult Edit(int? id)
-		{
-			if (id == null || id == 0)
-			{
-				return NotFound();
-			}
-
-			Product productFromDb = _unitOfWork.Product.Get(u => u.Id == id);
-			if (productFromDb == null)
-			{
-				return NotFound();
-			}
-
-			return View(productFromDb);
-		}
-
-		[HttpPost]
-		public IActionResult Edit(Product product) {
-
-			if (ModelState.IsValid && product != null) 
-			{
-				_unitOfWork.Product.Update(product);
-				_unitOfWork.Save();
-				TempData["success"] = "Product updated successfully.";
-				return RedirectToAction("Index");
-			}
-			TempData["error"] = "Product could not be updated.";
-
-			return View();
 		}
 
 		public IActionResult Delete(int? id)
