@@ -82,3 +82,8 @@ Feature Segmentation: Features like reports, products, or support can each be or
 </td>
 </tr>
 </table>
+<h3>View Model</h3>
+<p>
+A View Model serves as a specialized object that contains only the data required by the view, helping to facililate the flow of information between controller and the view. 
+Entities are designed to model the structure of the database, while View Models are tailored to the specific needs of the view. It helps to implement the single responsibility in the SOLID principle.
+</p>
