@@ -1,12 +1,5 @@
 Build real world e-commerce application using ASP.NET Core MVC, Entity Framework Core and ASP.NET Core Identity.
 
-<<<<<<< HEAD
-Dependency Injection Service Lifetimes
-
-*** Transient - New Service is created for every request
-*** Scoped - New Service is created once per request
-*** Singleton - New Service is created once per application lifetime
-=======
 <h3>Dependency Injection Service Lifetimes</h3>
 * Transient - New Service- every time requested 
 * Scoped - New Service- once per request 
@@ -29,10 +22,6 @@ Separation of Concerns:
 The Repository Pattern separates business logic from data access logic, adhering to the Single Responsibility Principle. This means that changes to the data source or the way data is retrieved only affect the repository layer, leaving the business logic untouched.
 Testability:
 
-<<<<<<< HEAD
-Since the data access logic is abstracted, it is easier to unit test the business logic by mocking the repository. This makes the application more testable, particularly when using dependency injection to provide repository instances.</p>
->>>>>>> develop
-=======
 Since the data access logic is abstracted, it is easier to unit test the business logic by mocking the repository. 
 This makes the application more testable, particularly when using dependency injection to provide repository instances.</p>
 
@@ -48,9 +37,6 @@ Transaction Management: Unit of Work coordinates the work of multiple repositori
 Key Components
 Repositories: Each repository encapsulates logic for data operations on a particular entity.
 Unit of Work Class: It manages the repositories and calls SaveChanges() in a single transaction when all operations are complete.</p>
-<<<<<<< HEAD
->>>>>>> develop
-=======
 
 <h3>Areas</h3>
 <p>
@@ -101,4 +87,4 @@ Feature Segmentation: Features like reports, products, or support can each be or
 A View Model serves as a specialized object that contains only the data required by the view, helping to facililate the flow of information between controller and the view. 
 Entities are designed to model the structure of the database, while View Models are tailored to the specific needs of the view. It helps to implement the single responsibility in the SOLID principle.
 </p>
->>>>>>> develop
+
