@@ -48,4 +48,57 @@ Transaction Management: Unit of Work coordinates the work of multiple repositori
 Key Components
 Repositories: Each repository encapsulates logic for data operations on a particular entity.
 Unit of Work Class: It manages the repositories and calls SaveChanges() in a single transaction when all operations are complete.</p>
+<<<<<<< HEAD
+>>>>>>> develop
+=======
+
+<h3>Areas</h3>
+<p>
+Areas in ASP.NET are a feature that helps to organize large web applications into smaller, functional sections, making it easier to manage complexity and maintain separation of concerns. Each area is essentially a mini-MVC structure within an ASP.NET application, with its own controllers, views, and models. Areas are particularly useful for dividing application functionality logically, such as for different modules or sections like "Admin," "Customer," "Products," etc.
+
+Key Features of Areas
+Modular Structure: Each area contains its own set of controllers, views, and models, which helps to modularize the application into distinct sections.
+Independent MVC Structures: An area has its own Controllers, Views, and optionally Models, similar to how the main MVC application is organized.
+Routing: Areas have their own routes, which can help provide URLs that are specific to each part of the application. This also makes it easier to manage more complex routing configurations.
+Common Use Cases
+Admin vs. Customer Modules: For instance, an application may have an "Admin" area for managing the backend and a "Customer" area for users interacting with the frontend.
+Feature Segmentation: Features like reports, products, or support can each be organized into separate areas to facilitate easier development and maintenance.
+</p>
+<table>
+<tr>
+<th>ViewBag</th>
+<th>ViewData</th>
+<th>TempData</th>
+</tr>
+<tr>
+<td>
+<p>
+* ViewBag transfers data from the Controller to View, not vice-versa. Ideal situations in which the temporary data is not in a model.
+* ViewBag is a dynamic property that takes advantage of the new dynamic features in C# 4.0. Any number of properties can be assigned to ViewBag.
+* The ViewBag's life only lasts during the current http request. ViewBag values will be null if redirection occurs.
+
+</p>
+</td>
+<td>
+<p>
+* ViewData transfers data from the Controller to View, not vice-versa. Ideal situations in which the temporary data is not in a model. It is derived from ViewDataDictionary which is a dictionary type.
+* ViewData value must be type cast before use.
+* The ViewData's life only lasts during the current http request. ViewData values will be null if redirection occurs.
+</p>
+</td>
+<td>
+<p>
+* TempData can be used to store data between two consecutive requests.
+* TempData internally use Session to the data, so think of it as a short lived session.
+* TempData value must be type cast before use. Check for null values to avoid runtime error.
+* TempData can be used to store only one time messages like error messages, validation messages.
+</p>
+</td>
+</tr>
+</table>
+<h3>View Model</h3>
+<p>
+A View Model serves as a specialized object that contains only the data required by the view, helping to facililate the flow of information between controller and the view. 
+Entities are designed to model the structure of the database, while View Models are tailored to the specific needs of the view. It helps to implement the single responsibility in the SOLID principle.
+</p>
 >>>>>>> develop
