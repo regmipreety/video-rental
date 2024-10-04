@@ -2,12 +2,15 @@ using ASPWebApplication.Data;
 using ASPWebApplication.Repository;
 using ASPWebApplication.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddDbContext < ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))) ;
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
 //Add Category Repo and interface to the services
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 

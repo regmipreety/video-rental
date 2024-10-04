@@ -1,9 +1,10 @@
 ﻿using ASPWebApplication.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ASPWebApplication.Data
 {
-	public class ApplicationDbContext: DbContext
+	public class ApplicationDbContext: IdentityDbContext
 	{
 		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
 		{
@@ -15,6 +16,7 @@ namespace ASPWebApplication.Data
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
+			base.OnModelCreating(modelBuilder);
 			modelBuilder.Entity<Category>().HasData(
 				new Category { Id= 1, Name = "Action", DisplayOrder = 1},
 				new Category { Id = 2, Name = "Comedy", DisplayOrder = 2 },
