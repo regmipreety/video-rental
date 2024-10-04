@@ -87,4 +87,21 @@ Feature Segmentation: Features like reports, products, or support can each be or
 A View Model serves as a specialized object that contains only the data required by the view, helping to facililate the flow of information between controller and the view. 
 Entities are designed to model the structure of the database, while View Models are tailored to the specific needs of the view. It helps to implement the single responsibility in the SOLID principle.
 </p>
+<h4>Identity</h4>
+<p>
+ASP.NET Identity is a membership system that is used to manage user authentication and authorization in ASP.NET applications. It is a modern, flexible way to handle user credentials, roles, and permissions, providing developers with tools to implement secure authentication processes. Here's a detailed overview of ASP.NET Identity:
+
+Key Features of ASP.NET Identity
+Authentication and Authorization
+
+ASP.NET Identity allows you to create, manage, and authenticate users. It supports multiple authentication methods such as email/password, social logins (Google, Facebook, Twitter), and two-factor authentication (2FA).
+It also manages user roles and permissions, enabling you to define which users can access specific parts of your application.
+Database Integration
+
+ASP.NET Identity uses Entity Framework to store user information in a database. By default, it integrates with SQL Server, but it can be customized to work with other data stores (like MySQL, SQLite, etc.).
+The schema is flexible and can be extended to include custom properties for users, such as address, profile picture, etc.
+Supports Modern Authentication Protocols
+
+It supports OAuth and OpenID Connect, allowing easy integration with third-party identity providers, like Google, Facebook, Microsoft, and others, which makes social logins and federated identity scenarios easy to implement.
+</p>
 
