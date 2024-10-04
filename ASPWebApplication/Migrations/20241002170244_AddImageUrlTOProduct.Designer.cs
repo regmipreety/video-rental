@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASPWebApplication.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241002145701_AddProductTable")]
-    partial class AddProductTable
+    [Migration("20241002170244_AddImageUrlTOProduct")]
+    partial class AddImageUrlTOProduct
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -73,11 +73,18 @@ namespace ASPWebApplication.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Director")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -96,14 +103,18 @@ namespace ASPWebApplication.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Products");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
+                            CategoryId = 1,
                             Description = " This is based on true event. ",
                             Director = "Ron Parker",
+                            ImageUrl = "",
                             ListPrice = 30.0,
                             Price = 27.0,
                             Price50 = 25.0,
@@ -112,8 +123,10 @@ namespace ASPWebApplication.Migrations
                         new
                         {
                             Id = 2,
+                            CategoryId = 2,
                             Description = " Harry Porter and his friends go on an adventure. ",
                             Director = "JK Rowling",
+                            ImageUrl = "",
                             ListPrice = 300.0,
                             Price = 270.0,
                             Price50 = 250.0,
@@ -122,13 +135,26 @@ namespace ASPWebApplication.Migrations
                         new
                         {
                             Id = 3,
+                            CategoryId = 3,
                             Description = " It is a murder mystery. ",
                             Director = "Rina Ghosling",
+                            ImageUrl = "",
                             ListPrice = 300.0,
                             Price = 270.0,
                             Price50 = 250.0,
                             Title = "Pretty Little Liars"
                         });
+                });
+
+            modelBuilder.Entity("ASPWebApplication.Models.Product", b =>
+                {
+                    b.HasOne("ASPWebApplication.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }

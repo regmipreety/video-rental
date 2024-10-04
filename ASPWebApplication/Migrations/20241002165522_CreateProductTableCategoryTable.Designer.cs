@@ -3,6 +3,7 @@ using ASPWebApplication.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASPWebApplication.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241002165522_CreateProductTableCategoryTable")]
+    partial class CreateProductTableCategoryTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,10 +84,6 @@ namespace ASPWebApplication.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<double>("ListPrice")
                         .HasColumnType("float");
 
@@ -111,7 +110,6 @@ namespace ASPWebApplication.Migrations
                             CategoryId = 1,
                             Description = " This is based on true event. ",
                             Director = "Ron Parker",
-                            ImageUrl = "",
                             ListPrice = 30.0,
                             Price = 27.0,
                             Price50 = 25.0,
@@ -123,7 +121,6 @@ namespace ASPWebApplication.Migrations
                             CategoryId = 2,
                             Description = " Harry Porter and his friends go on an adventure. ",
                             Director = "JK Rowling",
-                            ImageUrl = "",
                             ListPrice = 300.0,
                             Price = 270.0,
                             Price50 = 250.0,
@@ -135,7 +132,6 @@ namespace ASPWebApplication.Migrations
                             CategoryId = 3,
                             Description = " It is a murder mystery. ",
                             Director = "Rina Ghosling",
-                            ImageUrl = "",
                             ListPrice = 300.0,
                             Price = 270.0,
                             Price50 = 250.0,
